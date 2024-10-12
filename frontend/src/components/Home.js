@@ -112,21 +112,20 @@ const Home = () => {
                 <ul>
                     <div className='news-patch'>
                         {patchLinks.length > 0 ? (
-                            patchLinks.map((patchInfo, index) => {
-                                return (
-                                    <li key={index}>
-                                        <a href={patchInfo[0]} target="_blank" rel="noopener noreferrer">
-                                            Patch {patchInfo[1].replace('-','.')}
-                                        </a>
-                                    </li>
-                                );
-                            })
+                            patchLinks.map((patchInfo, index) => (
+                                <li key={index}>
+                                    <a href={patchInfo[0]} target="_blank" rel="noopener noreferrer">
+                                        Patch {patchInfo[1].replace('-','.')} ({patchInfo[2]})
+                                    </a>
+                                </li>
+                            ))
                         ) : (
                             <li>Aucun patch n'a été trouvé.</li>
                         )}
                     </div>
                 </ul>
             </section>
+
 
 
 
