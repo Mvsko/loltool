@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = require('path'); // Ajoutez cette ligne
+const path = require('path');
 
 async function handleCommand(command, args = {}) {
     const commandName = command.trim();

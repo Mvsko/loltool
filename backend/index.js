@@ -17,7 +17,7 @@ wss.on('connection', (ws) => {
   ws.on('message', async (message) => {
     try {
       const command = JSON.parse(message);
-      const result = await handleCommand(command.command);
+      const result = await handleCommand(command.command, command.args);
       
       if (command.command === 'gethighestwinrate') {
         ws.send(JSON.stringify({ type: 'bestChampion', result }));
