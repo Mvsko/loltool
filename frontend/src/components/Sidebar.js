@@ -18,7 +18,7 @@ const Sidebar = () => {
         <li className="has-submenu">
           Fonctionnalités
           <ul className="submenu">
-            <li><Link to="/features" className='menu-link'>Datacreate</Link></li>
+            <li><Link to="/datacreate" className='menu-link'>Datacreate</Link></li>
             <li><Link to="/dataall" className='menu-link'>DataAll</Link></li>
           </ul>
         </li>

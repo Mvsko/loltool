@@ -8,46 +8,41 @@ const Home = () => {
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
-    const connectWebSocket = () => {
-      const websocket = new WebSocket('ws://localhost:5000');
+    const websocket = new WebSocket('ws://localhost:5000');
 
-      websocket.onopen = () => {
+    websocket.onopen = () => {
         console.log('WebSocket connection established');
         setWs(websocket);
         fetchBestChampion(websocket);
         fetchRecentSearches(websocket);
         fetchLastConnection(websocket, true);
-      };
+    };
 
-      websocket.onmessage = (event) => {
+    websocket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         console.log('Message from server:', data);
 
         if (data.type === 'bestChampion') {
-          setBestChampion(data.result);
+            setBestChampion(data.result);
         } else if (data.type === 'recentSearches') {
-          setRecentChampions(data.result);
+            setRecentChampions(data.result);
         } else if (data.type === 'lastConnection') {
-          setLastConnection(data.result.lastConnection);
+            setLastConnection(data.result.lastConnection);
         } else if (data.type === 'championUpdated') {
-          fetchBestChampion(websocket);
-          fetchRecentSearches(websocket);
+            fetchBestChampion(websocket);
+            fetchRecentSearches(websocket);
         }
-      };
-
-      websocket.onclose = () => {
-        console.log('WebSocket connection closed');
-      };
     };
 
-    connectWebSocket();
+    websocket.onclose = () => {
+        console.log('WebSocket connection closed');
+    };
 
     return () => {
-      if (ws) {
-        ws.close();
-      }
+        websocket.close();
     };
-  }, []);
+}, []);
+
 
   const fetchBestChampion = (websocket) => {
     websocket.send(JSON.stringify({ command: 'gethighestwinrate' }));
@@ -117,7 +112,7 @@ const Home = () => {
 
       <section className="last-connection">
         <h2>Dernière Connexion</h2>
-        <p>Vous vous êtes connecté le : {lastConnection ? new Date(lastConnection).toLocaleString() : 'Chargement...'}</p>
+        <p>Vous vous êtes connecté le: {lastConnection ? new Date(lastConnection).toLocaleString() : 'Chargement...'}</p>
       </section>
     </div>
   );

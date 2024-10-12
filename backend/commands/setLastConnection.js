@@ -3,7 +3,7 @@ const path = require('path');
 
 const configFilePath = path.join(__dirname, '../data/config.json');
 
-const setLastConnection = () => {
+const setLastConnection = async () => {
     if (!fs.existsSync(configFilePath)) {
         return { error: 'Config file not found.' };
     }

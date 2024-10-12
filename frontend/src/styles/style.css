@@ -8,19 +8,21 @@ body {
   font-family: Arial, sans-serif;
   background: linear-gradient(to bottom right, #6c7a89, #3a506b);
   color: white;
-  min-height: 100vh; /* Utiliser min-height pour s'assurer que le body occupe toute la hauteur */
+  min-height: 100vh;
   display: flex;
-  flex-direction: column; /* Permet d'empiler les éléments verticalement */
+  flex-direction: column;
+  
 }
 
 .sidebar {
   width: 250px;
   background-color: #282d35;
-  height: auto;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   padding-top: 20px;
 }
+
 
 .logo {
   text-align: center;
@@ -86,7 +88,7 @@ p {
 }
 
 .home {
-  flex-grow: 1; /* Permet au contenu de s'étendre */
+  flex-grow: 1;
   padding: 40px;
   animation: fadeIn 1s ease-in-out;
 }

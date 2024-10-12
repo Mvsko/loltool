@@ -12,11 +12,13 @@ const getlastconnection = async (args = {}) => {
     const data = fs.readFileSync(configFilePath);
     const config = JSON.parse(data);
 
+    const previousLastConnection = config.lastConnection;
+
     if (args.shouldSet) {
         await setLastConnection.execute();
     }
 
-    return { lastConnection: config.lastConnection };
+    return { lastConnection: previousLastConnection };
 };
 
 module.exports = {
