@@ -5,6 +5,7 @@ const Home = () => {
     const [bestChampion, setBestChampion] = useState(null);
     const [recentChampions, setRecentChampions] = useState([]);
     const [lastConnection, setLastConnection] = useState(null);
+    const [patchLinks, setPatchLinks] = useState([]);
     const [ws, setWs] = useState(null);
 
     useEffect(() => {
@@ -16,6 +17,7 @@ const Home = () => {
             fetchBestChampion(websocket);
             fetchRecentSearches(websocket);
             fetchLastConnection(websocket, true);
+            fetchPatchLinks(websocket);
         };
 
         websocket.onmessage = (event) => {
@@ -28,6 +30,9 @@ const Home = () => {
                 setRecentChampions(data.result);
             } else if (data.type === 'lastConnection') {
                 setLastConnection(data.result.lastConnection);
+            } else if (data.type === 'patchLinks') {
+                setPatchLinks(data.result);
+                console.log('Patch Links Received:', data.result);      
             } else if (data.type === 'championUpdated') {
                 fetchBestChampion(websocket);
                 fetchRecentSearches(websocket);
@@ -52,8 +57,11 @@ const Home = () => {
     };
 
     const fetchLastConnection = (websocket, shouldSet = false) => {
-        console.log('Fetching last connection...');
         websocket.send(JSON.stringify({ command: 'getlastconnection', args: { shouldSet } }));
+    };
+
+    const fetchPatchLinks = (websocket) => {
+        websocket.send(JSON.stringify({ command: 'getpatchlinks' }));
     };
 
     return (
@@ -95,17 +103,33 @@ const Home = () => {
                 </ul>
             </section>
 
+
+
+
             <section className="news">
                 <h2>Actualités</h2>
                 <p>Pour les dernières informations sur les patchs de League of Legends, consultez les liens suivants:</p>
                 <ul>
                     <div className='news-patch'>
-                        <li><a href="https://www.leagueoflegends.com/fr-fr/news/game-updates/patch-11-23-notes/">Patch 11.23</a></li>
-                        <li><a href="https://www.leagueoflegends.com/fr-fr/news/game-updates/patch-11-24-notes/">Patch 11.24</a></li>
-                        <li><a href="https://www.leagueoflegends.com/fr-fr/news/game-updates/patch-11-25-notes/">Patch 11.25</a></li>
+                        {patchLinks.length > 0 ? (
+                            patchLinks.map((patchInfo, index) => {
+                                return (
+                                    <li key={index}>
+                                        <a href={patchInfo[0]} target="_blank" rel="noopener noreferrer">
+                                            Patch {patchInfo[1].replace('-','.')}
+                                        </a>
+                                    </li>
+                                );
+                            })
+                        ) : (
+                            <li>Aucun patch n'a été trouvé.</li>
+                        )}
                     </div>
                 </ul>
             </section>
+
+
+
 
             <section className="last-connection">
                 <h2>Dernière Connexion</h2>

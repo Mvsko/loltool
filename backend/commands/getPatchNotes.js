@@ -1,39 +1,25 @@
 const axios = require('axios');
-const cheerio = require('cheerio');
 
-const getPatchNotes = async () => {
-  const url = 'https://www.leagueoflegends.com/fr-fr/news/tags/patch-notes/';
+const getpatchnotes = async () => {
+  const url = 'https://ddragon.leagueoflegends.com/api/versions.json';
 
   try {
     const response = await axios.get(url);
-    const $ = cheerio.load(response.data);
-    const patchNotes = [];
+    const versions = response.data;
+    const lastThreePatches = versions.slice(0, 3).map(version => version.split('.').slice(0, 2).join('.').replace('.','-'));
 
-    $('.article-card .article-card__title').each((index, element) => {
-      const title = $(element).text().trim();
-
-      if (title.includes('Notes de patch')) {
-        const lastWord = title.split(' ').pop();
-        patchNotes.push(lastWord);
-      }
-
-      if (patchNotes.length === 3) {
-        return false;
-      }
-    });
-
-    if (patchNotes.length === 0) {
+    if (lastThreePatches.length === 0) {
       return { error: 'No patch notes found' };
     }
 
-    return patchNotes;
+    return lastThreePatches;
   } catch (error) {
-    console.error('Error fetching patch notes:', error);
-    return { error: 'Failed to fetch patch notes' };
+    console.error('Error fetching the latest patch:', error);
+    return { error: 'Failed to fetch the latest patch version' };
   }
 };
 
 module.exports = {
   name: 'getpatchnotes',
-  execute: getPatchNotes,
+  execute: getpatchnotes,
 };

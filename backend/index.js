@@ -16,23 +16,23 @@ wss.on('connection', (ws) => {
 
   ws.on('message', async (message) => {
     try {
-      const command = JSON.parse(message);
-      const result = await handleCommand(command.command, command.args);
-      
-      if (command.command === 'gethighestwinrate') {
-        ws.send(JSON.stringify({ type: 'bestChampion', result }));
-      } else if (command.command === 'getlastsearch') {
-        ws.send(JSON.stringify({ type: 'recentSearches', result }));
-      } else if (command.command === 'getPatchNotes') {
-        ws.send(JSON.stringify({ type: 'patchNotes', result }));
-      } else if (command.command === 'getlastconnection') {
-        ws.send(JSON.stringify({ type: 'lastConnection', result }));
-      }
+        const command = JSON.parse(message);
+        const result = await handleCommand(command.command, command.args);
+        
+        if (command.command === 'gethighestwinrate') {
+            ws.send(JSON.stringify({ type: 'bestChampion', result }));
+        } else if (command.command === 'getlastsearch') {
+            ws.send(JSON.stringify({ type: 'recentSearches', result }));
+        } else if (command.command === 'getpatchlinks') {
+            ws.send(JSON.stringify({ type: 'patchLinks', result }));
+        } else if (command.command === 'getlastconnection') {
+            ws.send(JSON.stringify({ type: 'lastConnection', result }));
+        }
     } catch (error) {
-      console.error('Error processing message:', error);
-      ws.send(JSON.stringify({ error: 'Error processing command' }));
+        console.error('Error processing message:', error);
+        ws.send(JSON.stringify({ error: 'Error processing command' }));
     }
-  });
+});
 
   ws.on('close', () => {
     console.log('Client disconnected');
