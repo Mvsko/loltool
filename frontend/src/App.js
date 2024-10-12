@@ -10,7 +10,7 @@ import './styles/style.css';
 function App() {
   return (
     <Router>
-      <div style={{ display: 'flex' }}>
+      <div id="app">
         <Sidebar />
         <div className="content">
           <Routes>

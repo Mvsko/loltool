@@ -1,7 +1,28 @@
 {
   "appName": "LoLTool",
-  "version": "1.0.0",
+  "version": "0.1.2",
   "author": "mvsko",
   "description": "Une application dédiée aux statistiques et analyses de League of Legends.",
-  "lastConnection": ""
+  "lastConnection": "",
+  "settings": {
+    "language": "fr",
+    "notifications": true
+  },
+  "api": {
+    "baseURL": "",
+    "endpoints": {
+      "commands": "commands"
+    }
+  },
+  "features": {
+    "home": {
+      "enableChampionStats": true,
+      "enableRecentSearches": true,
+      "enablePatchUpdates": true,
+      "enableLastConnection": true
+    }
+  },
+  "logs": {
+    "discord-webhook": ""
+  }
 }

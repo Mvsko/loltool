@@ -9,9 +9,12 @@ body {
   background: linear-gradient(to bottom right, #6c7a89, #3a506b);
   color: white;
   min-height: 100vh;
+  margin: 0;
+}
+
+#app{
   display: flex;
-  flex-direction: column;
-  
+  height: 100vh;
 }
 
 .sidebar {
@@ -23,6 +26,11 @@ body {
   padding-top: 20px;
 }
 
+.content {
+  flex-grow: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
 
 .logo {
   text-align: center;
