@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Illaoi",
+    "mainRole": "top",
+    "tier": "A",
+    "winRate": "49.91%",
+    "rank": "32/56",
+    "pickRate": "3.0%",
+    "banRate": "6.2%",
+    "matches": "10,228",
+    "patch": "14.20",
+    "elo": "Emerald+"
+  },
+  {
+    "name": "Lux",
+    "mainRole": "support",
+    "tier": "D",
+    "winRate": "48.57%",
+    "rank": "41/48",
+    "pickRate": "5.7%",
+    "banRate": "3.4%",
+    "matches": "19,294",
+    "patch": "14.20",
+    "elo": "Emerald+"
+  },
+  {
+    "name": "Elise",
+    "mainRole": "jungle",
+    "tier": "S+",
+    "winRate": "51.36%",
+    "rank": "4/50",
+    "pickRate": "5.7%",
+    "banRate": "13.1%",
+    "matches": "17,148",
+    "patch": "14.20",
+    "elo": "Emerald+"
+  }
+]
